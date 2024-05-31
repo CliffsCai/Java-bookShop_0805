@@ -1,0 +1,9 @@
+com/common/Result.class
+com/example/controller/UserController.class
+com/example/entity/User.class
+com/example/service/IUserService.class
+com/example/SpringbootApplication.class
+com/example/mapper/UserMapper.class
+com/example/controller/request/UserPageRequest.class
+com/example/service/impl/UserService.class
+com/example/controller/request/BaseRequest.class
