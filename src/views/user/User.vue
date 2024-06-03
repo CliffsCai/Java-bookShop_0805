@@ -9,14 +9,30 @@
     <el-button style = "margin-left: 10px" type="warning" @click="reset"><i class="el-icon-refresh-right"></i> 重制</el-button>
   </div>
   <el-table :data="tableData" stripe>
+    <el-table-column prop = "id" label="编号"></el-table-column>
+    <el-table-column prop = "username" label="会员号"></el-table-column>
     <el-table-column prop = "name" label="姓名"></el-table-column>
     <el-table-column prop = "age" label="年龄"></el-table-column>
     <el-table-column prop = "address" label="地址"></el-table-column>
     <el-table-column prop = "phone" label="联系方式"></el-table-column>
     <el-table-column prop = "sex" label="性别"></el-table-column>
+    <el-table-column prop = "createtime" label="创建时间"></el-table-column>
+    <el-table-column prop = "updatetime" label="更新时间"></el-table-column>
 
-
+    <el-table-column label="编辑">
+      <template v-slot="scope">
+        <el-button type="primary" @click="$router.push('/editUser?id=' + scope.row.id)">编辑</el-button>
+        <el-popconfirm
+            style="margin-left: 5px"
+            title="您确定删除这行数据吗？"
+            @confirm="del(scope.row.id)"
+        >
+          <el-button type="danger" slot="reference">删除</el-button>
+        </el-popconfirm>
+        </template>
+    </el-table-column>
   </el-table>
+
 
   <!--分页-->
   <div style="margin-top: 20px">
@@ -84,6 +100,17 @@ export default {
     handleCurrentChange(pageNum){
       this.params.pageNum = pageNum
       this.load()
+    },
+    del(id){
+      request.delete("/user/delete/" +id).then(res =>{
+        if (res.code === '200'){
+          this.$notify.success('删除成功')
+          this.load()
+        }
+        else{
+          this.$notify.error(res.msg)
+        }
+      })
     }
 
   }

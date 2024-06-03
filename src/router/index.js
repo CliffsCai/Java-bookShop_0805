@@ -10,18 +10,44 @@ const routes = [
     name: 'home',
     component: HomeView,
   },
+    // ====== User ======
   {
-    path: '/user',
-    name: 'User',
+    path: '/userList',
+    name: 'UserList',
     component: ()=> import('@/views/user/User.vue'),
 
-  },  {
+  },
+  {
     path: '/addUser',
     name: 'AddUser',
     component: ()=> import('@/views/user/AddUser.vue'),
 
   },
+  {
+    path: '/editUser',
+    name: 'EditUser',
+    component: ()=> import('@/views/user/EditUser.vue'),
 
+  },
+  // ====Admin=====
+  {
+    path: '/adminList',
+    name: 'AdminList',
+    component: ()=> import('@/views/admin/List.vue'),
+
+  },
+  {
+    path: '/addAdmin',
+    name: 'AddAdmin',
+    component: ()=> import('@/views/admin/Add.vue'),
+
+  },
+  {
+    path: '/editAdmin',
+    name: 'EditAdmin',
+    component: ()=> import('@/views/admin/Edit.vue'),
+
+  },
 ]
 
 const router = new VueRouter({
