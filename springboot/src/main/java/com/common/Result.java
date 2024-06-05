@@ -26,7 +26,14 @@ public class Result {
     public static Result error(String msg) {
         Result result = new Result();
         result.setCode(ERROR_CODE);
-        result.setData(msg);
+        result.setMsg(msg);          //不能setData否则会反
+        return result;
+    }
+
+    public static Result error(String code, String msg) {
+        Result result = new Result();
+        result.setCode(code);
+        result.setMsg(msg);          //不能setData否则会反
         return result;
     }
 

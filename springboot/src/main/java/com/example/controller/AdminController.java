@@ -2,23 +2,38 @@ package com.example.controller;
 
 
 import com.common.Result;
+import com.example.controller.dto.LoginDTO;
 import com.example.controller.request.AdminPageRequest;
-import com.example.controller.request.UserPageRequest;
+import com.example.controller.request.LoginRequest;
+import com.example.controller.request.PasswordRequest;
 import com.example.entity.Admin;
 import com.example.service.IAdminService;
-import com.example.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @CrossOrigin
-@RestController
+
 @RequestMapping("/admin")    // 关系到views中前端网页的地址
+@RestController
 public class AdminController {
 
     @Autowired
     IAdminService adminService;
+
+    @PostMapping("/login")
+    public Result login(@RequestBody LoginRequest request){
+        LoginDTO login = adminService.login(request);
+        return Result.success(login);
+    }
+
+
+    @PutMapping("/password")
+    public Result password(@RequestBody PasswordRequest request){
+        adminService.changePass(request);
+        return Result.success();
+    }
 
     @PostMapping("/save")
     public Result save(@RequestBody Admin obj){

@@ -1,59 +1,121 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import HomeView from '@/views/HomeView.vue'
+import Layout from '@/views/Layout.vue'
+import Cookies from "js-cookie"
 
 Vue.use(VueRouter)
 
+
 const routes = [
+
+
+    //======= 登录 ========
+  {
+    path:'/login',
+    name:'Login',
+    component: ()=> import('@/views/login/Login.vue'),
+  },
+
+
+ // ======= 主页 =========
   {
     path: '/',
-    name: 'home',
-    component: HomeView,
-  },
-    // ====== User ======
-  {
-    path: '/userList',
-    name: 'UserList',
-    component: ()=> import('@/views/user/User.vue'),
+    name: 'Layout',
+    component: Layout,
+    redirect: '/home',        //主页为子路由，进入页面重定向显示home,其他子路由点击进入
+    children:[
 
+      {
+        path: 'home',
+        name: 'Home',
+        component: ()=> import('@/views/home/HomeView.vue'),
+
+      },
+      // ====== User ======
+      {
+        path: 'userList',
+        name: 'UserList',
+        component: ()=> import('@/views/user/User.vue'),
+
+      },
+      {
+        path: 'addUser',
+        name: 'AddUser',
+        component: ()=> import('@/views/user/AddUser.vue'),
+
+      },
+      {
+        path: 'editUser',
+        name: 'EditUser',
+        component: ()=> import('@/views/user/EditUser.vue'),
+
+      },
+      // ====Admin=====
+      {
+        path: 'adminList',
+        name: 'AdminList',
+        component: ()=> import('@/views/admin/List.vue'),
+
+      },
+      {
+        path: 'addAdmin',
+        name: 'AddAdmin',
+        component: ()=> import('@/views/admin/Add.vue'),
+
+      },
+      {
+        path: 'editAdmin',
+        name: 'EditAdmin',
+        component: ()=> import('@/views/admin/Edit.vue'),
+
+      },
+
+      // ====Category=====
+      {
+        path: 'categoryList',
+        name: 'CategoryList',
+        component: ()=> import('@/views/category/List.vue'),
+
+      },
+      {
+        path: 'addCategory',
+        name: 'AddCategory',
+        component: ()=> import('@/views/category/Add.vue'),
+
+      },
+      {
+        path: 'editCategory',
+        name: 'EditCategory',
+        component: ()=> import('@/views/category/Edit.vue'),
+
+      },
+    ]
   },
   {
-    path: '/addUser',
-    name: 'AddUser',
-    component: ()=> import('@/views/user/AddUser.vue'),
-
-  },
-  {
-    path: '/editUser',
-    name: 'EditUser',
-    component: ()=> import('@/views/user/EditUser.vue'),
-
-  },
-  // ====Admin=====
-  {
-    path: '/adminList',
-    name: 'AdminList',
-    component: ()=> import('@/views/admin/List.vue'),
-
-  },
-  {
-    path: '/addAdmin',
-    name: 'AddAdmin',
-    component: ()=> import('@/views/admin/Add.vue'),
-
-  },
-  {
-    path: '/editAdmin',
-    name: 'EditAdmin',
-    component: ()=> import('@/views/admin/Edit.vue'),
-
-  },
+    path: "*",
+    component: () => import('@/views/404.vue')
+  }
 ]
+
+
+// const originalPush = VueRouter.prototype.push                        //解决 守卫路由的 路由跳转错误而导致的登录问题    //已解决，在Login.vue中先将数据存下再跳转
+// VueRouter.prototype.push = function push(location, resolve, reject) {
+//   if ( resolve || reject ) return originalPush.call(this, location, resolve, reject)
+//   return originalPush.call(this, location).catch((e)=>{})
+// }
+
 
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
+})
+
+router.beforeEach((to, from ,next)=>{
+  if(to.path ==='/login') next()
+  const admin = Cookies.get("admin")                          //一定要导入Cookies
+  if(!admin && to.path !=='/login') return next("/login")     //如果Login.vue中先跳转再存数据会产生问题，因为跳转时会进入此代码，此时Cookies为空
+  next()
 })
 
 export default router
