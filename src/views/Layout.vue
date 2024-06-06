@@ -4,7 +4,7 @@
     <div style="height: 60px;line-height: 60px;background-color: white; margin-bottom: 2px; display: flex">
       <div style="width: 300px">
         <img src="@/assets/logo.png" alt="" style="width: 40px;position: relative; top: 10px; left: 20px">
-        <span style="margin-left: 25px;font-size: 24px">图书管理系统</span>
+        <span style="margin-left: 25px;font-size: 24px">TEst</span>
       </div>
     <div style="flex:1;text-align: right;padding-right: 20px ">   <!--除了300px都给他 -->
       <el-dropdown size="medium">
@@ -47,17 +47,35 @@
           </el-submenu>
           <el-submenu index="category">
             <template slot="title">
-              <i class="el-icon-book"></i>
+              <i class="el-icon-user"></i>
               <span>图书分类管理</span>
             </template>
             <el-menu-item index="/addCategory">分类添加</el-menu-item>    <!--加斜杠可以保证刷新后保持原界面-->
             <el-menu-item index="/categoryList">分类列表</el-menu-item>
           </el-submenu>
+
+          <el-submenu index="book">
+            <template slot="title">
+              <i class="el-icon-user"></i>
+              <span>图书管理</span>
+            </template>
+            <el-menu-item index="/addBook">图书添加</el-menu-item>    <!--加斜杠可以保证刷新后保持原界面-->
+            <el-menu-item index="/bookList">图书列表</el-menu-item>
+          </el-submenu>
+
+          <el-submenu index="borrow">
+            <template slot="title">
+              <i class="el-icon-user"></i>
+              <span>借书管理</span>
+            </template>
+            <el-menu-item index="/addBorrow">借书</el-menu-item>    <!--加斜杠可以保证刷新后保持原界面-->
+            <el-menu-item index="/BorrowList">借书记录</el-menu-item>
+          </el-submenu>
         </el-menu>
       </div>
 
       <!--主体数据-->
-      <div style="flex: 1;background-color: white; padding:10px">
+      <div style="flex: 1;widen:0;background-color: white; padding:10px">  <!--flex: 1;widen:0 可以保证左侧不会因为右侧的切换而变换宽度-->
         <router-view/>       <!--展现子路由页面-->
       </div>
     </div>

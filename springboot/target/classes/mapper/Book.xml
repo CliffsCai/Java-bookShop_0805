@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.example.mapper.BookMapper">
+
+    <insert id="save">
+        insert into book(name,description,publish_date,author,publisher,category,book_no,cover,score)
+        values (#{name}, #{description}, #{publish_date},#{author},#{publisher}, #{category}, #{book_no}, #{cover}, #{score})
+    </insert>
+
+    <update id="updateById">
+        update book set name = #{name}, description = #{description}, publish_date = #{publish_date}, author = #{author},
+                        publisher = #{publisher}, category = #{category} , book_no = #{book_no} , cover = #{cover}, score = #{score} where id = #{id}
+    </update>
+
+    <delete id="deleteById">
+        delete from book where id = #{id}
+    </delete>
+
+    <select id="list" resultType="com.example.entity.Book">
+        select * from book
+    </select>
+
+    <select id="listByCondition" resultType="com.example.entity.Book">
+        select *from book
+                <where>
+                    <if test="name != null and name != ''">
+                        name like concat('%', #{ name }, '%')
+                    </if>
+                    <if test="book_no != null and book_no != ''">
+                        book_no like concat('%', #{book_no}, '%')
+                    </if>
+
+                </where>
+        order by id desc
+    </select>
+
+    <select id="getById" resultType="com.example.entity.Book">
+        select * from book where id = #{id}
+    </select>
+
+</mapper>

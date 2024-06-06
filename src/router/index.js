@@ -89,6 +89,46 @@ const routes = [
         component: ()=> import('@/views/category/Edit.vue'),
 
       },
+
+
+      // ====Book=====
+      {
+        path: 'bookList',
+        name: 'BookList',
+        component: ()=> import('@/views/book/List.vue'),
+
+      },
+      {
+        path: 'addBook',
+        name: 'AddBook',
+        component: ()=> import('@/views/book/Add.vue'),
+
+      },
+      {
+        path: 'editBook',
+        name: 'EditBook',
+        component: ()=> import('@/views/book/Edit.vue'),
+
+      },
+      // ====Borrow=====
+      {
+        path: 'borrowList',
+        name: 'BorrowList',
+        component: ()=> import('@/views/borrow/List.vue'),
+
+      },
+      {
+        path: 'addBorrow',
+        name: 'AddBorrow',
+        component: ()=> import('@/views/borrow/Add.vue'),
+
+      },
+      {
+        path: 'editBorrow',
+        name: 'EditBorrow',
+        component: ()=> import('@/views/borrow/Edit.vue'),
+
+      },
     ]
   },
   {
