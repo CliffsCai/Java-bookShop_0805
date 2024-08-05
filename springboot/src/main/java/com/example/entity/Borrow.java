@@ -8,17 +8,19 @@ import java.time.LocalDate;
 
 @Data
 public class Borrow {
-    private int id;
+    private Integer id;
     private String book_name;
-    private int book_no;
+    private Integer book_no;
+    private Integer book_number;
     private String username;           //username
-    private String name;     //name
+    private String name;     //user's name
     private String user_phone;
     @JsonFormat(pattern  = "yyyy-MM-dd", timezone = "GMT+8")
     private LocalDate createtime;
     @JsonFormat(pattern  = "yyyy-MM-dd", timezone = "GMT+8")
     private LocalDate updatetime;
-    private int score;
+    private Integer score;
+    private Integer borrow_num;
 
 
 

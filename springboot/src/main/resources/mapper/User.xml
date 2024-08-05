@@ -7,12 +7,12 @@
 <mapper namespace="com.example.mapper.UserMapper">
 
     <insert id="save">
-        insert into user(name,username,age,sex,phone,address)
-        values (#{name}, #{username}, #{age},#{sex},#{phone}, #{address})
+        insert into user(name,username,age,sex,phone,address,user_score)
+        values (#{name}, #{username}, #{age},#{sex},#{phone}, #{address}, #{user_score})
     </insert>
 
     <update id="updateById">
-        update user set name = #{name}, age = #{age}, sex = #{sex}, phone = #{phone}, address = #{address}, updatetime = #{updatetime} where id = #{id}
+        update user set name = #{name}, age = #{age}, sex = #{sex}, phone = #{phone}, address = #{address}, updatetime = #{updatetime}, user_score = #{user_score} where id = #{id}
     </update>
 
     <delete id="deleteById">

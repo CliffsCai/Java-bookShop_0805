@@ -35,6 +35,9 @@
       <el-form-item label="封面" prop="cover">
         <el-input v-model="form.cover" placeholder="请输入封面"></el-input>
       </el-form-item>
+      <el-form-item label="数量" prop="number">
+        <el-input v-model="form.number" placeholder="请输入数量"></el-input>
+      </el-form-item>
 
       <el-form-item label="积分" prop="score">
         <el-input-number v-model="form.score"  :min="0" :max="10" label="请输入积分"></el-input-number>
@@ -89,7 +92,7 @@ export default {
               this.$refs['ruleForm'].resetFields()
             }
             else{
-              this.$notify.error(res.msg)
+              this.$notify.error(res.msg)      //返回后端的msg
 
             }
           })

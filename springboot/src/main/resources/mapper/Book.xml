@@ -7,13 +7,13 @@
 <mapper namespace="com.example.mapper.BookMapper">
 
     <insert id="save">
-        insert into book(name,description,publish_date,author,publisher,category,book_no,cover,score)
-        values (#{name}, #{description}, #{publish_date},#{author},#{publisher}, #{category}, #{book_no}, #{cover}, #{score})
+        insert into book(name,description,publish_date,author,publisher,category,book_no,cover,score, number)
+        values (#{name}, #{description}, #{publish_date},#{author},#{publisher}, #{category}, #{book_no}, #{cover}, #{score}, #{number})
     </insert>
 
     <update id="updateById">
         update book set name = #{name}, description = #{description}, publish_date = #{publish_date}, author = #{author},
-                        publisher = #{publisher}, category = #{category} , book_no = #{book_no} , cover = #{cover}, score = #{score} where id = #{id}
+                        publisher = #{publisher}, category = #{category} , book_no = #{book_no} , cover = #{cover}, score = #{score}, number = #{number} where id = #{id}
     </update>
 
     <delete id="deleteById">

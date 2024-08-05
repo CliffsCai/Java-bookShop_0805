@@ -23,6 +23,7 @@ public class Book {
     @JsonFormat(pattern  = "yyyy-MM-dd", timezone = "GMT+8")
     private LocalDate updatetime;
     private Integer score;
+    private Integer number;
 
     private List<String> categories;   //传进新增的
 

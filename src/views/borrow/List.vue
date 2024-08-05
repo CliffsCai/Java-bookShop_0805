@@ -3,8 +3,8 @@
 <div>
   <!-- 搜索表单 -->
   <div style="margin-bottom: 20px">
-    <el-input style = "width: 240px" placeholder = "请输入名称" v-model="params.name"> </el-input>
-    <el-input style = "width: 240px" placeholder = "请输入编码" v-model="params.borrow_no"> </el-input>
+    <el-input style = "width: 240px" placeholder = "请输入书籍名称" v-model="params.book_name"> </el-input>
+    <el-input style = "width: 240px" placeholder = "请输入用户名称" v-model="params.name"> </el-input>
     <el-button style = "margin-left: 10px" type="primary" @click="load"><i class="el-icon-search"></i> 搜索</el-button>
     <el-button style = "margin-left: 10px" type="warning" @click="reset"><i class="el-icon-refresh-right"></i> 重制</el-button>
   </div>
@@ -18,10 +18,11 @@
     <el-table-column prop = "createtime" label="创建时间"></el-table-column>
     <el-table-column prop = "updatetime" label="更新时间"></el-table-column>
     <el-table-column prop = "score" label="消耗积分"></el-table-column>
+    <el-table-column prop = "borrow_num" label="借阅数量"></el-table-column>
 
-    <el-table-column label="编辑">
+    <el-table-column label="操作">
       <template v-slot="scope">
-        <el-button type="primary" @click="$router.push('/editBorrow?id=' + scope.row.id)">编辑</el-button>
+
         <el-popconfirm
             style="margin-left: 5px"
             title="您确定删除这行数据吗？"
@@ -62,6 +63,7 @@ export default {
         pageNum:1,
         pageSize:10,
         name:'',
+        username:''
       }
 
     }
@@ -92,6 +94,7 @@ export default {
         pageNum:1,
         pageSize:10,
         name:'',
+        username:''
       }
       this.load()
     },

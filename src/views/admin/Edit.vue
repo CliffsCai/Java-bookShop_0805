@@ -39,6 +39,7 @@ export default {
     })
   },
   methods:{
+    // 这里的this.form 已经被 el-form更改
       save(){
       request.put('/admin/update', this.form).then(res =>{
         if(res.code ==='200'){

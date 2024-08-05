@@ -17,9 +17,9 @@
     <el-table-column prop = "publisher" label="发行商"></el-table-column>
     <el-table-column prop = "category" label="分类"></el-table-column>
     <el-table-column prop = "book_no" label="书籍编号"></el-table-column>
+    <el-table-column prop = "number" label="数量"></el-table-column>
+    <el-table-column prop = "score" label="消耗积分"></el-table-column>
     <el-table-column prop = "cover" label="封面">
-      <el-table-column prop = "score" label="消耗积分"></el-table-column>
-
       <template v-slot="scope">
         <el-image :src="scope.row.cover" :preview-src-list="[]"></el-image>
       </template>

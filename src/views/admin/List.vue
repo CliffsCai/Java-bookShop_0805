@@ -109,7 +109,8 @@ export default {
         this.$notify.warning("您的操作不合法")
         return
       }
-      request.put('/admin/update', this.form).then(res =>{
+      // 一定要注意传row进去，row为修改后的数据
+      request.put('/admin/update', row).then(res =>{
             if(res.code ==='200'){
               this.$notify.success('操作成功')
               this.load()

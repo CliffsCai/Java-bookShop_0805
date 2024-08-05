@@ -23,6 +23,11 @@ public class UserController {
         userService.save(user);
         return Result.success();
     }
+    @PostMapping("/score")
+    public Result score(@RequestBody User user){
+        userService.handleSocre(user);
+        return Result.success();
+    }
 
 
 
@@ -53,7 +58,6 @@ public class UserController {
 
     @GetMapping("/page")
     public Result page(UserPageRequest userPageRequest){
-
         return Result.success(userService.page(userPageRequest));
     }
 }

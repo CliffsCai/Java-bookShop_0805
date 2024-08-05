@@ -52,7 +52,7 @@ public class AdminService implements IAdminService {
             adminMapper.save(obj);
         }catch (Exception e){
             log.error("数据插入失败");
-            throw new ServiceException("用户插入失败,用户名已存在");
+            throw new ServiceException("图书添加失败,书名或编号已存在");
 }
 
     }

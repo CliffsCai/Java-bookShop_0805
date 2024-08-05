@@ -18,9 +18,11 @@
     <el-table-column prop = "sex" label="性别"></el-table-column>
     <el-table-column prop = "createtime" label="创建时间"></el-table-column>
     <el-table-column prop = "updatetime" label="更新时间"></el-table-column>
+    <el-table-column prop = "user_score" label="用户积分"></el-table-column>
 
-    <el-table-column label="编辑">
+    <el-table-column label="操作">
       <template v-slot="scope">
+        <el-button type="warning" @click="handleAccountAdd(scope.row)">充值</el-button>
         <el-button type="primary" @click="$router.push('/editUser?id=' + scope.row.id)">编辑</el-button>
         <el-popconfirm
             style="margin-left: 5px"
@@ -45,6 +47,23 @@
         :total = "total">
     </el-pagination>
   </div>
+
+  <el-dialog title="充值" :visible.sync="dialogFormVisible" widen="30%">
+    <el-form :model="form" label-widen="100px" ref="ruleForm">   <!--ref要写,对应下方的method里的-->
+      <el-form-item label="当前积分" prop="user_score">     <!--查看当前用户积分-->
+        <el-input disabled v-model="form.user_score" autocomplete="off" ></el-input>
+      </el-form-item>
+      <el-form-item label="充值积分" prop="score">     <!--prop和rules与下方rules中的对应-->
+        <el-input v-model="form.score" autocomplete="off" ></el-input>
+      </el-form-item>
+
+
+    </el-form>
+    <div slot="footer" class="dialog-footer">
+      <el-button @click="dialogFormVisible = false">取 消</el-button>
+      <el-button type="primary" @click="addScore">确 定</el-button>
+    </div>
+  </el-dialog>
 </div>
 </template>
 
@@ -63,7 +82,9 @@ export default {
         pageSize:10,
         name:'',
         phone:''
-      }
+      },
+      dialogFormVisible :false,
+      form:{}
 
     }
   },
@@ -109,6 +130,25 @@ export default {
         }
         else{
           this.$notify.error(res.msg)
+        }
+      })
+    },
+    handleAccountAdd(row){
+      this.form = JSON.parse(JSON.stringify(row))
+      this.dialogFormVisible = true
+    },
+    addScore(){
+      this.$refs['ruleForm'].validate((valid) =>{
+        if(valid){
+          request.post('/user/score', this.form).then(res =>{
+            if(res.code === '200'){
+              this.$notify.success('充值成功')
+              this.dialogFormVisible=false
+              this.load()
+            }else{
+              this.$notify.error(res.msg)
+            }
+          })
         }
       })
     }

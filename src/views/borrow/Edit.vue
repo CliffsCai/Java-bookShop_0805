@@ -2,15 +2,51 @@
   <div style="width: 70%">
       <div style="margin-bottom: 30px">编辑书籍</div>
     <el-form :inline="true" :model="form" :rules="rules" ref = "ruleForm" label-width="100px">
-      <el-table-column prop = "id" label="编号"></el-table-column>
-      <el-table-column prop = "book_name" label="书籍名称"></el-table-column>
-      <el-table-column prop = "book_no" label="书籍编号"></el-table-column>
-      <el-table-column prop = "user_id" label="用户编号"></el-table-column>
-      <el-table-column prop = "user_name" label="用户名称"></el-table-column>
-      <el-table-column prop = "user_phone" label="电话"></el-table-column>
-      <el-table-column prop = "createtime" label="创建时间"></el-table-column>
-      <el-table-column prop = "updatetime" label="更新时间"></el-table-column>
-      <el-table-column prop = "score" label="消耗积分"></el-table-column>
+
+
+      <el-form-item label="图书名称" prop="book_name">
+        <el-select v-model="form.book_name" clearable filterable placeholder="请选择" @change="selBook">
+          <el-option
+              v-for="item in books"
+              :key="item.id"
+              :label="item.name"
+              :value="item.name">
+          </el-option>
+        </el-select>
+      </el-form-item>
+      <el-form-item label="图书编号" prop="book_no">
+        <el-input v-model="form.book_no" disabled ></el-input>
+      </el-form-item>
+      <el-form-item label="消耗积分" prop="score">
+        <el-input v-model="form.score" disabled ></el-input>
+      </el-form-item>
+      <el-form-item label="借阅数量" prop="borrow_num">
+        <el-input-number v-model="form.borrow_num"  :min="1" :max="10" label="请输入借阅数量"></el-input-number>
+      </el-form-item>
+
+
+
+      <el-form-item label="用户姓名" prop="name">
+        <el-select v-model="form.name" clearable filterable placeholder="请选择" @change="selUser">
+          <el-option
+              v-for="item in users"
+              :key="item.id"
+              :label="item.name"
+              :value="item.name">
+          </el-option>
+        </el-select>
+      </el-form-item>
+      <el-form-item label="用户编号" prop="username">
+        <el-input v-model="form.username"disabled></el-input>
+      </el-form-item>
+      <el-form-item label="手机号" prop="user_phone">
+        <el-input v-model="form.user_phone" disabled></el-input>
+      </el-form-item>
+
+
+
+
+
 
     </el-form>
     <div style="text-align: center;margin-top: 30px ">
@@ -28,25 +64,14 @@ export default {
   data() {
     return {
       form: {},
-      categories:[],
-      rules: {
-        name: [
-          { required: true, message: '名称不能为空', trigger: 'blur' }
-        ],
-    }
 
   }
   },
   created(){
 
-    request.get('/category/tree').then(res =>{       //这个代码用于下来菜单中数据的获取
-      this.categories = res.data   //将返回的数据赋值给categories
-    })
-
     const id = this.$route.query.id
     request.get("/borrow/" + id).then(res => {
       this.form = res.data
-      this.form.categories = this.form.category.split(" > ")  //用于显示文本
     })
 
 
@@ -66,9 +91,6 @@ export default {
         }
       })
     },
-    handleChange(){
-
-    }
   }
 }
 

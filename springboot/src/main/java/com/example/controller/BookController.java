@@ -5,6 +5,7 @@ import cn.hutool.core.collection.CollUtil;
 import com.common.Result;
 import com.example.controller.request.BookPageRequest;
 import com.example.entity.Book;
+import com.example.entity.User;
 import com.example.service.IBookService;
 import org.apache.ibatis.type.NStringTypeHandler;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +38,11 @@ public class BookController {
         return Result.success();
     }
 
-
+    @PostMapping("/number")
+    public Result number(@RequestBody Book book){
+        bookService.handleNumber(book);
+        return Result.success();
+    }
 
     @PutMapping("/update")
     public Result update(@RequestBody Book book){
@@ -51,6 +56,8 @@ public class BookController {
         bookService.update(book);
         return Result.success();
     }
+
+
 
     @DeleteMapping("/delete/{id}")
     public Result delete(@PathVariable Integer id){

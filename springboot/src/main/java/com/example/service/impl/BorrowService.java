@@ -40,7 +40,7 @@ public class BorrowService implements IBorrowService {
     }
 
     @Override
-    public Borrow  getById(Integer id) {
+    public Borrow getById(Integer id) {
         return borrowMapper.getById(id);
     }
 
